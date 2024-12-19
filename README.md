@@ -1,5 +1,5 @@
 # Ethical-Hacking-Books
-**Step-by-Step Guide to Learn Cyber Security and Ethical Hacking with Kali Linux**
+## **Step-by-Step Guide to Learn Cyber Security and Ethical Hacking with Kali Linux**
 
 1. Foundation: Understanding the Basics :
  - Learn Networking Basics: Understand how networks function, including TCP/IP, DNS, firewalls, and VPNs.
@@ -44,23 +44,23 @@
  - Certified Ethical Hacker (CEH)
  - Offensive Security Certified Professional (OSCP)
 
-**Best Books for Cyber Security & Ethical Hacking**
+## **Best Books for Cyber Security & Ethical Hacking**
 1. "Hacking: The Art of Exploitation" by Jon Erickson.
 2. "The Web Application Hacker's Handbook" by Dafydd Stuttard.
 3. "Penetration Testing: A Hands-On Introduction to Hacking" by Georgia Weidman.
 4. "The Basics of Hacking and Penetration Testing" by Patrick Engebretson.
 
-Free Books and Download Links
+## Free Books and Download Links
 - Hacking Tutorials and Guides: Hacking PDFs Archive (Find free Linux and hacking resources).
 - Linux Command Line: Linux Command Guide PDF.
 
-Best YouTube Channels for Tutorials
+## Best YouTube Channels for Tutorials
 - HackerSploit: Beginner to advanced ethical hacking guides.
 - The Cyber Mentor: In-depth penetration testing and OSCP preparation.
 - NetworkChuck: Networking and ethical hacking for beginners.
 -  Null Byte - Cyber Security for Hackers: Tutorials on Kali Linux tools.
 
-Practice Platforms
+## Practice Platforms
 - TryHackMe
 - Hack The Box
 - OverTheWire
