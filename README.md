@@ -1,4 +1,4 @@
-# Ethical-Hacking-Books
+# Cyber Security & Ethical-Hacking
 ## **Step-by-Step Guide to Learn Cyber Security and Ethical Hacking with Kali Linux**
 
 1. Foundation: Understanding the Basics :
