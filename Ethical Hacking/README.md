@@ -18,7 +18,7 @@
    - [pico CTF](https://picoctf.org/)
    - [AttackIQ Academy](https://academy.attackiq.com/)
    - [Blue team labs online](https://blueteamlabs.online/)
-   - ]Security essentials from Cisco](https://www.netacad.com/courses/security)
+   - [Security essentials from Cisco](https://www.netacad.com/courses/security)
 5. Coding & Scripting
    - learn python
       - [Python Essentials by Cisco](https://www.netacad.com/courses/programming/pcap-programming-essentials-python)
