@@ -1,5 +1,5 @@
-## Ethical Hacking is a Journey 
-### Below are some of the Resources to learn
+# Ethical Hacking is a Journey 
+## Below are some of the Resources to learn
 1. Computer Basics
    - [Professor Messer in Youtube](https://www.youtube.com/user/professormesser)
    - [Paul Browning in Youtube]https://www.youtube.com/user/paulcbrowning)
