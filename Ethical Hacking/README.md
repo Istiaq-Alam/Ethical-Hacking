@@ -2,7 +2,7 @@
 ## Below are some of the Resources to learn
 1. Computer Basics
    - [Professor Messer in Youtube](https://www.youtube.com/user/professormesser)
-   - [Paul Browning in Youtube](https://www.youtube.com/user/paulcbrowning)
+   - [David Bombal in Youtube](https://youtube.com/@davidbombal?si=NQKqKLo1KtOi7ZQ4)
    - [Mike Meyers in Udemy CompTIA A+](https://www.udemy.com/user/mikemeyers/)
 2. Network Training
    - [Network Plus by Professor Messer in Youtube](https://www.youtube.com/playlist?list=PLG49S3nxzAnmpdmX7RoTOyuNJQAb-r-gd)
