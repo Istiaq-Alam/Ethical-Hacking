@@ -16,7 +16,7 @@
    - YouTube: "Introduction to Ethical Hacking" by Simplilearn.
 
 3. Learn Kali Linux
- - Setup and Basics:
+ - Setup and Basics: 
    - Install Kali Linux (dual boot or VM) and explore its tools.
    - Free Resource: Kali Linux Official Documentation.
    - YouTube: "Complete Kali Linux Tutorial" by HackerSploit.
