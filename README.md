@@ -53,7 +53,7 @@
 ## Free Books and Download Links
 - Hacking Tutorials and Guides: Hacking PDFs Archive (Find free Linux and hacking resources).
 - Linux Command Line: Linux Command Guide PDF.
-
+ 
 ## Best YouTube Channels for Tutorials
 - HackerSploit: Beginner to advanced ethical hacking guides.
 - The Cyber Mentor: In-depth penetration testing and OSCP preparation.
