@@ -21,7 +21,7 @@ def analyze_http_pcapng(filename):
                 print("-" * 50)
 
 if __name__ == "__main__":
-    pcapng_file = "capture.pcapng"   # আপনার ফাইলের নাম দিন
+    pcapng_file = "capture.pcapng"   # Capture File Name
     analyze_http_pcapng(pcapng_file)
     packets = rdpcap('capture.pcapng')
     pkt = packets[0]
