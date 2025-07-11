@@ -139,4 +139,3 @@ Boom! 🎯 You’ve captured credentials in plaintext. This is **why HTTP is ins
 
 ---
 
-Would you like me to generate a **PDF version of this guide** or help you with a sample **assignment write-up/report** for submission?
