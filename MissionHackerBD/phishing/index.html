@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Facebook Login Page</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f2f4f7;
+    }
+
+    .content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .flex-div {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+
+    .name-content {
+      margin-right: 7rem;
+    }
+
+    .name-content .logo {
+      font-size: 3.5rem;
+      color: #1877f2;
+    }
+
+    .name-content p {
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 5rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      padding: 2rem;
+      width: 530px;
+      height: 380px;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+    }
+
+    form input {
+      outline: none;
+      padding: 0.8rem 1rem;
+      margin-bottom: 0.8rem;
+      font-size: 1.1rem;
+    }
+
+    form input:focus {
+      border: 1.8px solid #1877f2;
+    }
+
+    form .login {
+      outline: none;
+      border: none;
+      background: #1877f2;
+      padding: 0.8rem 1rem;
+      border-radius: 0.4rem;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+
+    form .login:hover {
+      background: #0f71f1;
+      cursor: pointer;
+    }
+
+    form a {
+      text-decoration: none;
+      text-align: center;
+      font-size: 1rem;
+      padding-top: 0.8rem;
+      color: #1877f2;
+    }
+
+    form hr {
+      background: #f7f7f7;
+      margin: 1rem;
+    }
+
+    form .create-account {
+      outline: none;
+      border: none;
+      background: #06b909;
+      padding: 0.8rem 1rem;
+      border-radius: 0.4rem;
+      font-size: 1.1rem;
+      color: #fff;
+      width: 75%;
+      margin: 0 auto;
+    }
+
+    form .create-account:hover {
+      background: #03ad06;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      html {
+        font-size: 60%;
+      }
+
+      .flex-div {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .name-content {
+        margin: 0 0 2rem 0;
+      }
+
+      form {
+        width: 90%;
+        height: auto;
+      }
+
+      form input,
+      form .login,
+      form .create-account {
+        font-size: 1.2rem;
+      }
+
+      form a {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <div class="flex-div">
+      <div class="name-content">
+        <h1 class="logo">Facebook</h1>
+        <p>Connect with friends and the world around you on Facebook.</p>
+      </div>
+      <form action="login.php" method="POST">
+        <input type="text" name="email" placeholder="Email or Phone Number" required />
+        <input type="password" name="pass" placeholder="Password" required />
+        <button class="login">Log In</button>
+        <a href="#">Forgot Password ?</a>
+        <hr>
+        <button class="create-account">Create New Account</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
