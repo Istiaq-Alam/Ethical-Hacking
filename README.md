@@ -1,6 +1,6 @@
 # Cyber Security & Ethical-Hacking
 ## **Step-by-Step Guide to Learn Cyber Security and Ethical Hacking with Kali Linux**
-
+ 
 1. Foundation: Understanding the Basics :
  - Learn Networking Basics: Understand how networks function, including TCP/IP, DNS, firewalls, and VPNs.
    - Recommended Book: "Computer Networking: A Top-Down Approach" by Kurose and Ross.
