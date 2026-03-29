@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ethical Hacking Resource Vault</title>
+  <style>
+    :root {
+      --bg: #020702;
+      --panel: #061206;
+      --line: #113311;
+      --text: #9dff9d;
+      --accent: #33ff66;
+      --muted: #6ccf6c;
+      --danger: #ff4d4d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Consolas", "Courier New", monospace;
+      color: var(--text);
+      background: radial-gradient(circle at top, #081608 0%, var(--bg) 50%);
+      min-height: 100vh;
+      line-height: 1.4;
+    }
+    .scanlines::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(51, 255, 102, 0.05),
+        rgba(51, 255, 102, 0.05) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      z-index: 1;
+    }
+    main {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem 3rem;
+    }
+    .terminal {
+      border: 1px solid var(--line);
+      background: rgba(0, 0, 0, 0.45);
+      border-radius: 12px;
+      box-shadow: 0 0 24px rgba(51, 255, 102, 0.13);
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+    .terminal-bar {
+      display: flex;
+      gap: .4rem;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      background: #040a04;
+      padding: .5rem .75rem;
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot.red { background: var(--danger); }
+    .dot.yellow { background: #ffd54f; }
+    .dot.green { background: var(--accent); }
+    .title { margin-left: .5rem; color: var(--muted); font-size: .85rem; }
+    .hero { padding: 1.25rem; }
+    h1 { margin: 0 0 .5rem; font-size: clamp(1.4rem, 3vw, 2rem); }
+    p { margin: .25rem 0; color: var(--muted); }
+    .prompt { color: var(--accent); }
+    .grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    section {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: rgba(5, 14, 5, 0.65);
+      padding: 1rem;
+    }
+    h2 { margin-top: 0; font-size: 1rem; color: var(--accent); }
+    a { color: var(--text); text-decoration: none; }
+    a:hover { color: var(--accent); text-decoration: underline; }
+    ul { margin: 0; padding-left: 1.1rem; max-height: 420px; overflow: auto; }
+    li { margin: .28rem 0; }
+    .search {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: #030803;
+      color: var(--text);
+      border-radius: 8px;
+      padding: .55rem .65rem;
+      margin-bottom: .7rem;
+      font-family: inherit;
+    }
+    .stat { color: var(--muted); font-size: .9rem; margin-bottom: .6rem; }
+    footer { margin-top: 1rem; font-size: .8rem; color: var(--muted); }
+    code { color: var(--accent); }
+  </style>
+</head>
+<body class="scanlines">
+  <main>
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+        <span class="title">root@ethical-hacking:~</span>
+      </div>
+      <div class="hero">
+        <h1>[ Ethical Hacking Resource Vault ]</h1>
+        <p><span class="prompt">$</span> Curated hacker-themed index for repository resources and PDF eBooks.</p>
+        <p><span class="prompt">$</span> Browse folders for tools/content and open PDF resources directly from this page.</p>
+      </div>
+    </div>
+
+    <div class="grid">
+      <section>
+        <h2>Directory Access</h2>
+        <p class="stat">Quick entry points to all primary resource collections.</p>
+        <ul id="folder-list"></ul>
+      </section>
+
+      <section>
+        <h2>PDF eBooks + Documents</h2>
+        <input id="pdf-search" class="search" type="search" placeholder="search pdf files..." aria-label="Search PDF resources" />
+        <div class="stat"><span id="pdf-count">0</span> files indexed</div>
+        <ul id="pdf-list"></ul>
+      </section>
+    </div>
+
+    <footer>
+      <div>Tip: publish this repository with GitHub Pages and set <code>index.html</code> as the site entry point.</div>
+    </footer>
+  </main>
+
+  <script>
+    const folders = ["Architecture", "CheatSheet", "Computer Networking", "Database Basics", "Guides", "Hacking Books", "MissionHacker", "Operating System", "Penetration Testing", "Tools"];
+    const pdfs = ["Architecture/Computer-Organization-And-architecture-9th-edition.pdf", "Architecture/Fundamentalsof-Computer-Algorithms-By-Ellis-Horowitz_compressed.pdf", "Architecture/Introduction.to.Algorithms.4th.Leiserson.Stein.Rivest.Cormen.MIT.Press.9780262046305.EBooksWorld.ir.pdf", "Architecture/hands-oncybersecurityforarchitects_ebook.pdf", "Architecture/hands-oncybersecuritywithblockchain_ebook.pdf", "CheatSheet/CISSP Cheat Sheet.pdf", "CheatSheet/Certified Ethical Hacker (CEH) Exam Cheat Sheet.pdf", "CheatSheet/Common Ports Cheat Sheet.pdf", "CheatSheet/CompTIA A+ Cheat Sheet.pdf", "CheatSheet/CompTIA Network+ Cheat Sheet.pdf", "CheatSheet/CompTIA Security+ Cheat Sheet.pdf", "CheatSheet/IPv4-SUBNETS-cheat-sheet-v1.pdf", "CheatSheet/Linux File Permissions Cheat Sheet.pdf", "CheatSheet/Linux-cheat-sheet-v1.pdf", "CheatSheet/OSI Reference Model Acronyms.pdf", "CheatSheet/OSI Reference Model Cheat Sheet.pdf", "CheatSheet/Powershell cheat sheet.pdf", "CheatSheet/Python Data Structures Cheat Sheet.pdf", "CheatSheet/SQL Cheat Sheet.pdf", "CheatSheet/Splunk Cheat Sheet.pdf", "CheatSheet/Sqlmap Cheat Sheet.pdf", "CheatSheet/Tmux Cheat Sheet.pdf", "CheatSheet/Unix Commands Cheat Sheet.pdf", "CheatSheet/Vi Cheat Sheet.pdf", "CheatSheet/Windows Command Line Cheat Sheet.pdf", "CheatSheet/Wireshark-Cheat-Sheet-v1.pdf", "CheatSheet/Xpath Cheat Sheet.pdf", "CheatSheet/hacking-tools-cheat-sheet.pdf", "CheatSheet/nmap_cheet_sheet_v7.pdf", "CheatSheet/ssh commands cheat sheet.pdf", "CheatSheet/tcpdump cheat sheet.pdf", "Computer Networking/CCNA 6th Edition - Todd Lammle (ebook).pdf", "Computer Networking/Computer Networking A Top-Down Approach 6th Edition.pdf", "Computer Networking/Computer Networking A Top-Down Approach 7th Edition.pdf.pdf", "Computer Networking/Computer Networking A Top-Down Approach 8th Edition.pdf", "Computer Networking/Networking_Fundamentals_by_SMB_University.pdf", "Computer Networking/masteringpfsense_ebook.pdf", "Database Basics/Chapter 1- Introduction To DBMS.pdf", "Database Basics/Chapter 10- XML.pdf", "Database Basics/Chapter 11- Storage and File Structure.pdf", "Database Basics/Chapter 12- Indexing and Hashing.pdf", "Database Basics/Chapter 13- Query Processing.pdf", "Database Basics/Chapter 14- Query Optimization.pdf", "Database Basics/Chapter 15- Transactions.pdf", "Database Basics/Chapter 16- Concurrency Control.pdf", "Database Basics/Chapter 17- Recovery System.pdf", "Database Basics/Chapter 18- Database System Architectures.pdf", "Database Basics/Chapter 19- Distributed Databases.pdf", "Database Basics/Chapter 2- ER diagram.pdf", "Database Basics/Chapter 20- Parallel Databases.pdf", "Database Basics/Chapter 21- Application Development and Administration.pdf", "Database Basics/Chapter 22- Advanced Querying and Information Retrieval.pdf", "Database Basics/Chapter 23- Advanced Data Types and New Applications.pdf", "Database Basics/Chapter 24- Advanced Transaction Processing.pdf", "Database Basics/Chapter 3- Relational Model.pdf", "Database Basics/Chapter 3- relational model from ERD.pdf", "Database Basics/Chapter 4- SQL.pdf", "Database Basics/Chapter 5- Other Relational Languages.pdf", "Database Basics/Chapter 6- Integrity and Security.pdf", "Database Basics/Chapter 7- Relational Database Design.pdf", "Database Basics/Chapter 8- Object-Oriented Databases.pdf", "Database Basics/Chapter 9- Object-Relational Databases.pdf", "Database Basics/Creating database and table_Jan2024.pdf", "Database Basics/Database System Concepts 6e By Abraham Silberschatz, Henry Korth and S Sudarshan.pdf", "Database Basics/Normalisation.pdf", "Database Basics/PHP+DBconnection.pdf", "Database Basics/SQLNotesForProfessionals.pdf", "Database Basics/installation_xampp.ppt.pdf", "Guides/Google Hacks.pdf", "Guides/Mastering Python Forensics.pdf", "Guides/Python Crash Course, 2nd Edition.pdf", "Guides/Python-Cracking Cyphers.pdf", "Guides/comptiasecuritypluscertificationguide_ebook.pdf", "Hacking Books/Begin Ethical Hacking with Python.pdf", "Hacking Books/Beginning Ethical Hacking with Kali Linux_ Computational Techniques for Resolving Security Issues ( PDFDrive ).pdf", "Hacking Books/Black Hat Python Python Programming for Hackers and Pentesters.pdf", "Hacking Books/Black Hat Python.pdf", "Hacking Books/Ethical Hacking With Kali Linux Learn Fast How To Hack.pdf", "Hacking Books/Gray Hat Python.pdf", "Hacking Books/Hacking GMail (ExtremeTech).pdf", "Hacking Books/Hacking- The Art of Exploitation.pdf", "Hacking Books/Hacking_ The Ultimate Hacking for Beginners_ How to Hack_ Hacking Intelligence_ Certified Hacking Book ( PDFDrive ).pdf", "Hacking Books/Nmap 6_ Network exploration and security auditing Cookbook.pdf", "Hacking Books/The Web Application Hacker's Handbook.pdf", "Hacking Books/Weaving the Dark Web.pdf", "Hacking Books/metasploitforbeginners_ebook.pdf", "Hacking Books/metasploitpenetrationtestingcookbook_ebook.pdf", "Hacking Books/nmap_networkexplorationandsecurityauditingcookbook_ebook.pdf", "Hacking Books/web-hacking-101.pdf", "MissionHacker/0-10 Lectures/Bettercap.pdf", "MissionHacker/0-10 Lectures/Final Course Module for Cybersecurity.pdf", "MissionHacker/0-10 Lectures/Module-1.pdf", "MissionHacker/0-10 Lectures/Module-2-3.pdf", "MissionHacker/0-10 Lectures/Module-3-4.pdf", "MissionHacker/0-10 Lectures/Module-7-8.pdf", "MissionHacker/0-10 Lectures/Module2-3.pdf", "MissionHacker/0-10 Lectures/kaliSharefolder.pdf", "MissionHacker/0-10 Lectures/metasploit.pdf", "MissionHacker/0-10 Lectures/nmap-netcat.pdf", "MissionHacker/Assignments/IstiaqAlam_CEH_Assignment-01.pdf", "MissionHacker/Assignments/IstiaqAlam_CEH_Assignment-02.pdf", "MissionHacker/Assignments/IstiaqAlam_CEH_Assignment-03.pdf", "MissionHacker/Assignments/IstiaqAlam_CEH_Assignment-04.pdf", "MissionHacker/Assignments/IstiaqAlam_CEH_Assignment-05.pdf", "MissionHacker/Assignments/IstiaqAlam_CEH_Assignment-06.pdf", "MissionHacker/Assignments/IstiaqAlam_CEH_Assignment-07.pdf", "MissionHacker/Assignments/IstiaqAlam_CEH_Assignment-08.pdf", "Operating System/BashNotesForProfessionals.pdf", "Operating System/Kali-Linux-Revealed-1st-edition.pdf", "Operating System/Learning-Kali-Linux.pdf", "Operating System/Linux Programming Interface.pdf", "Operating System/Linux-Bible.pdf", "Operating System/LinuxNotesForProfessionals.pdf", "Operating System/PowerShellNotesForProfessionals.pdf", "Operating System/kali_linux_tutorial.pdf", "Penetration Testing/A Bug Hunter's Diary.pdf", "Penetration Testing/Advanced Penetration Testing Hacking 2017.pdf", "Penetration Testing/Advanced_Persistent_Threat_Hacking.pdf", "Penetration Testing/Cloud-penetration-testing-playbook.pdf", "Penetration Testing/Hands-On Bug Hunting for Penetration Testers.pdf", "Penetration Testing/Learning Penetration Testing With Python - Christopher Duffy.pdf", "Penetration Testing/Modern Web Penetration Testing 2016.pdf", "Penetration Testing/OSCP OffSec Penetration Testing with Kali Linux (2014).pdf", "Penetration Testing/Penetration Testing - A Hands-On Introduction to Hacking.pdf", "Penetration Testing/Penetration Testing - A hands-on introduction to Hacking.pdf", "Penetration Testing/Penetration Testing Essentials 2017.pdf", "Penetration Testing/PracticalMobileForensicsThirdEdition_ColorImages.pdf", "Penetration Testing/Python Web Penetration Testing Cookbook.pdf", "Penetration Testing/digitalforensicsandincidentresponse_ebook.pdf", "Penetration Testing/practicalmobileforensics_ebook.pdf", "Penetration Testing/security_testing_tutorial.pdf"];
+
+    const folderList = document.getElementById('folder-list');
+    const pdfList = document.getElementById('pdf-list');
+    const pdfSearch = document.getElementById('pdf-search');
+    const pdfCount = document.getElementById('pdf-count');
+
+    function createLink(path) {
+      const a = document.createElement('a');
+      a.href = encodeURI(path);
+      a.textContent = path;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      return a;
+    }
+
+    folders.forEach(path => {
+      const li = document.createElement('li');
+      li.appendChild(createLink(path));
+      folderList.appendChild(li);
+    });
+
+    function renderPdfs(query = '') {
+      const q = query.trim().toLowerCase();
+      const filtered = q ? pdfs.filter(p => p.toLowerCase().includes(q)) : pdfs;
+      pdfList.innerHTML = '';
+      filtered.forEach(path => {
+        const li = document.createElement('li');
+        li.appendChild(createLink(path));
+        pdfList.appendChild(li);
+      });
+      pdfCount.textContent = String(filtered.length);
+    }
+
+    pdfSearch.addEventListener('input', (e) => renderPdfs(e.target.value));
+    renderPdfs();
+  </script>
+</body>
+</html>
