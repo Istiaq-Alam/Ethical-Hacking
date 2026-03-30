@@ -987,7 +987,7 @@
         // ============================================================
         function renderFolders(folders) {
             const grid = document.getElementById('folders-grid');
-            if (!folders.length) { grid.innerHTML = '<div class="empty-msg">NO MODULES FOUND</div>'; return; }
+            if (!folders.length) { grid.innerHTML = '<div class="empty-msg" align="center">API LIMITE REACHED // NO MODULES FOUND</div>'; return; }
 
             grid.innerHTML = folders.map(f => {
                 const name = f.name || f.path;
