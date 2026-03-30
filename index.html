@@ -14,14 +14,17 @@
             --bg: #020408;
             --bg2: #060d10;
             --bg3: #0a1520;
+            --bg4: #09110c;
             --green: #00ff41;
             --green2: #00cc33;
             --green3: #008822;
+            --green4: #36ff88;
             --dim: #00ff4133;
             --dimmer: #00ff4111;
             --red: #ff0040;
             --amber: #ffaa00;
             --cyan: #00eeff;
+            --crt: #7dffb3;
             --text: #c8ffc8;
             --muted: #4a7a4a;
             --border: #0d3318;
@@ -44,13 +47,30 @@
         }
 
         body {
-            background: var(--bg);
+            background:
+                radial-gradient(1200px 700px at 15% -10%, rgba(0, 255, 65, 0.08), transparent 55%),
+                radial-gradient(900px 500px at 88% 5%, rgba(0, 238, 255, 0.04), transparent 60%),
+                linear-gradient(180deg, var(--bg2), var(--bg));
             color: var(--text);
             font-family: var(--font-body);
             font-size: 16px;
             min-height: 100vh;
             overflow-x: hidden;
             cursor: crosshair;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(0deg, rgba(0, 255, 65, 0.014) 0 1px, transparent 1px 3px),
+                radial-gradient(circle at 30% 20%, rgba(0, 255, 65, 0.05), transparent 50%);
+            background-size: 100% 3px, 100% 100%;
+            opacity: 0.42;
+            pointer-events: none;
+            z-index: 2;
+            animation: crtNoise 0.25s steps(2) infinite;
         }
 
         /* === MATRIX RAIN BG === */
@@ -73,11 +93,11 @@
             background: repeating-linear-gradient(0deg,
                     transparent,
                     transparent 2px,
-                    rgba(0, 255, 65, 0.015) 2px,
-                    rgba(0, 255, 65, 0.015) 4px);
+                    rgba(0, 255, 65, 0.04) 2px,
+                    rgba(0, 255, 65, 0.04) 4px);
             pointer-events: none;
             z-index: 9999;
-            animation: scanline 8s linear infinite;
+            animation: scanline 7s linear infinite, scanFlicker 8s ease-in-out infinite;
         }
 
         @keyframes scanline {
@@ -87,6 +107,40 @@
 
             100% {
                 background-position: 0 100vh;
+            }
+        }
+
+        @keyframes scanFlicker {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            49% {
+                opacity: 0.96;
+            }
+
+            50% {
+                opacity: 0.9;
+            }
+
+            52% {
+                opacity: 0.98;
+            }
+        }
+
+        @keyframes crtNoise {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(0.5px);
+            }
+
+            100% {
+                transform: translateY(-0.5px);
             }
         }
 
@@ -109,7 +163,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 0 30px rgba(0, 255, 65, 0.05);
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.14), 0 0 70px rgba(0, 255, 65, 0.05);
         }
 
         .nav-logo {
@@ -150,7 +204,7 @@
             height: 6px;
             background: var(--green);
             border-radius: 50%;
-            animation: blink 1.2s ease-in-out infinite;
+            animation: blink 1.2s ease-in-out infinite, statusPulse 2.2s ease-in-out infinite;
             box-shadow: 0 0 6px var(--green);
         }
 
@@ -163,6 +217,18 @@
 
             50% {
                 opacity: 0.3
+            }
+        }
+
+        @keyframes statusPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 6px var(--green);
+            }
+
+            50% {
+                box-shadow: 0 0 10px var(--green), 0 0 22px rgba(0, 255, 65, 0.35);
             }
         }
 
@@ -204,6 +270,7 @@
             text-shadow: 0 0 40px rgba(0, 255, 65, 0.4), 0 0 80px rgba(0, 255, 65, 0.15);
             margin-bottom: 0.5rem;
             letter-spacing: 0.05em;
+            position: relative;
         }
 
         .hero h1 .dim-word {
@@ -265,6 +332,36 @@
             position: relative;
         }
 
+        .search-cursor {
+            position: absolute;
+            left: 2.6rem;
+            top: 50%;
+            transform: translateY(-52%);
+            font-family: var(--font-mono);
+            color: var(--green4);
+            font-size: 0.95rem;
+            pointer-events: none;
+            animation: cursorBlink 0.85s steps(1) infinite;
+            text-shadow: 0 0 8px rgba(0, 255, 65, 0.8);
+        }
+
+        .search-wrap.has-text .search-cursor {
+            opacity: 0;
+        }
+
+        @keyframes cursorBlink {
+
+            0%,
+            48% {
+                opacity: 1;
+            }
+
+            49%,
+            100% {
+                opacity: 0;
+            }
+        }
+
         .search-prompt {
             position: absolute;
             left: 1rem;
@@ -292,7 +389,7 @@
 
         #search:focus {
             border-color: var(--green);
-            box-shadow: 0 0 0 1px var(--green2), 0 0 20px rgba(0, 255, 65, 0.1);
+            box-shadow: 0 0 0 1px var(--green2), 0 0 28px rgba(0, 255, 65, 0.24), inset 0 0 24px rgba(0, 255, 65, 0.06);
         }
 
         #search::placeholder {
@@ -341,7 +438,7 @@
             background: var(--card);
             padding: 1.5rem 1.2rem;
             cursor: pointer;
-            transition: background 0.15s;
+            transition: background 0.15s, box-shadow 0.15s, transform 0.15s;
             position: relative;
             overflow: hidden;
             display: flex;
@@ -362,6 +459,8 @@
 
         .folder-card:hover {
             background: var(--bg3);
+            box-shadow: inset 0 0 22px rgba(0, 255, 65, 0.08), 0 0 20px rgba(0, 255, 65, 0.12);
+            transform: translateY(-1px);
         }
 
         .folder-card:hover::before {
@@ -370,6 +469,7 @@
 
         .folder-card.active {
             background: var(--bg3);
+            box-shadow: inset 0 0 25px rgba(0, 255, 65, 0.1), 0 0 16px rgba(0, 255, 65, 0.2);
         }
 
         .folder-card.active::before {
@@ -449,13 +549,14 @@
             padding: 0.4rem 0.9rem;
             cursor: pointer;
             letter-spacing: 0.15em;
-            transition: color 0.15s, border-color 0.15s;
+            transition: color 0.15s, border-color 0.15s, transform 0.08s, box-shadow 0.15s;
             text-transform: uppercase;
         }
 
         .btn-back:hover {
             color: var(--green);
             border-color: var(--green3);
+            box-shadow: 0 0 12px rgba(0, 255, 65, 0.2);
         }
 
         /* === FILE TABLE === */
@@ -482,11 +583,26 @@
 
         .file-table tbody tr {
             border-bottom: 1px solid var(--dimmer);
-            transition: background 0.1s;
+            transition: background 0.1s, box-shadow 0.12s;
+            animation: rowIn 0.35s ease-out both;
+            animation-delay: calc(var(--row-index, 0) * 40ms);
         }
 
         .file-table tbody tr:hover {
             background: var(--dimmer);
+            box-shadow: inset 0 0 18px rgba(0, 255, 65, 0.05);
+        }
+
+        @keyframes rowIn {
+            0% {
+                transform: translateX(-14px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
 
         .file-table td {
@@ -569,13 +685,19 @@
             text-transform: uppercase;
             text-decoration: none;
             display: inline-block;
-            transition: color 0.15s, border-color 0.15s, background 0.15s;
+            transition: color 0.15s, border-color 0.15s, background 0.15s, transform 0.08s, box-shadow 0.15s;
         }
 
         .btn-view:hover {
             color: var(--bg);
             background: var(--green);
             border-color: var(--green);
+            box-shadow: 0 0 14px rgba(0, 255, 65, 0.35);
+        }
+
+        .btn-view:active,
+        .btn-back:active {
+            transform: translateY(1px) scale(0.98);
         }
 
         /* === LOADING === */
@@ -587,6 +709,7 @@
             display: flex;
             align-items: center;
             gap: 0.7rem;
+            animation: loadingPulse 1.05s ease-in-out infinite;
         }
 
         .loading-msg::before {
@@ -603,6 +726,18 @@
         @keyframes spin {
             to {
                 transform: rotate(360deg);
+            }
+        }
+
+        @keyframes loadingPulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.66;
             }
         }
 
@@ -709,6 +844,14 @@
             .file-table td:nth-child(3) {
                 display: none;
             }
+
+            body::after {
+                opacity: 0.65;
+            }
+
+            .boot-lines {
+                min-height: 180px;
+            }
         }
 
         /* === GLITCH ANIMATION ON TITLE === */
@@ -745,10 +888,146 @@
         .hero h1 {
             animation: glitch 6s ease-in-out infinite;
         }
+
+        .hero h1.glitch-boost {
+            animation: glitch 0.55s steps(2) 1;
+            filter: hue-rotate(25deg);
+        }
+
+        .screen-flash {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9000;
+            animation: flashOut 190ms ease-out forwards;
+        }
+
+        .screen-flash.scan {
+            background: rgba(0, 255, 65, 0.07);
+        }
+
+        .screen-flash.glitch {
+            background: linear-gradient(90deg, rgba(255, 0, 64, 0.09), rgba(0, 238, 255, 0.07));
+        }
+
+        @keyframes flashOut {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+
+        #boot-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 20000;
+            background:
+                radial-gradient(800px 400px at 20% 10%, rgba(0, 255, 65, 0.08), transparent 65%),
+                #02050a;
+            color: #91ffb4;
+            font-family: var(--font-mono);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        #boot-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 320ms ease;
+        }
+
+        .boot-shell {
+            width: min(780px, 94vw);
+            border: 1px solid rgba(0, 255, 65, 0.25);
+            background: rgba(5, 18, 10, 0.86);
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.15), inset 0 0 35px rgba(0, 255, 65, 0.05);
+            padding: 1rem;
+        }
+
+        .boot-title {
+            color: var(--green4);
+            letter-spacing: 0.14em;
+            margin-bottom: 0.6rem;
+            font-size: 0.82rem;
+        }
+
+        .boot-lines {
+            min-height: 140px;
+            font-size: 0.78rem;
+            line-height: 1.55;
+            color: #86d68f;
+            white-space: pre-wrap;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .boot-lines.typing::after {
+            content: '_';
+            color: var(--green4);
+            animation: cursorBlink 0.75s steps(1) infinite;
+            margin-left: 2px;
+        }
+
+        .boot-progress {
+            margin-top: 0.75rem;
+            border: 1px solid rgba(0, 255, 65, 0.35);
+            height: 12px;
+            background: rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .boot-progress>span {
+            display: block;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--green3), var(--green), var(--green4));
+            box-shadow: 0 0 12px rgba(0, 255, 65, 0.4);
+            transition: width 120ms linear;
+        }
+
+        .boot-skip {
+            margin-top: 0.8rem;
+            color: #4f8a5f;
+            font-size: 0.68rem;
+            letter-spacing: 0.08em;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+
+            #matrix-canvas {
+                display: none;
+            }
+
+            body::before,
+            body::after {
+                opacity: 0.15;
+            }
+        }
     </style>
 </head>
 
 <body>
+
+    <div id="boot-screen" aria-live="polite">
+        <div class="boot-shell">
+            <div class="boot-title">SPY*DER INIT SEQUENCE :: ETHICAL-HACKING-HUB</div>
+            <div class="boot-lines" id="boot-lines"></div>
+            <div class="boot-progress"><span id="boot-progress-bar"></span></div>
+            <div class="boot-skip">AUTO BOOT IN PROGRESS // WAIT FOR COMPLETE LOAD</div>
+        </div>
+    </div>
 
     <canvas id="matrix-canvas"></canvas>
 
@@ -797,6 +1076,7 @@
                 <span class="search-prompt">$_</span>
                 <input type="text" id="search" placeholder="search resources, tools, books..." autocomplete="off"
                     spellcheck="false" />
+                <span class="search-cursor">_</span>
             </div>
         </div>
 
@@ -872,6 +1152,15 @@
         let currentPath = [];
         let fileCache = {};
         let totalFiles = 0;
+        let lastFlashAt = 0;
+
+        const BOOT_LINES = [
+            '[BOOT] checking kernel privileges ... ok',
+            '[NET] establishing secure tunnel ........ ok',
+            '[FS ] indexing modules .................. ok',
+            '[SEC] loading exploit knowledge-base .... ok',
+            '[UI ] launching tactical interface ...... ok'
+        ];
 
         // ============================================================
         // MATRIX RAIN
@@ -936,6 +1225,7 @@
         // INIT
         // ============================================================
         async function init() {
+            runBootSequence();
             try {
                 const contents = await fetchContents();
                 allFolders = contents.filter(i => i.type === 'dir');
@@ -959,6 +1249,94 @@
             } catch (e2) {
                 document.getElementById('folders-grid').innerHTML =
                     `<div class="error-msg" style="grid-column:1/-1">FATAL // Cannot reach GitHub API. Check connection.</div>`;
+            }
+        }
+
+        function screenFlash(kind = 'scan') {
+            const now = Date.now();
+            if (now - lastFlashAt < 140) return;
+            lastFlashAt = now;
+            const flash = document.createElement('div');
+            flash.className = `screen-flash ${kind}`;
+            document.body.appendChild(flash);
+            setTimeout(() => flash.remove(), 210);
+        }
+
+        function boostTitleGlitch() {
+            const title = document.querySelector('.hero h1');
+            if (!title) return;
+            title.classList.add('glitch-boost');
+            setTimeout(() => title.classList.remove('glitch-boost'), 560);
+        }
+
+        function runBootSequence() {
+            const boot = document.getElementById('boot-screen');
+            const lines = document.getElementById('boot-lines');
+            const progress = document.getElementById('boot-progress-bar');
+            if (!boot || !lines || !progress) return;
+
+            if (sessionStorage.getItem('spyder_boot_done') === '1') {
+                boot.classList.add('hidden');
+                setTimeout(() => boot.remove(), 350);
+                return;
+            }
+
+            let i = 0;
+            let finished = false;
+            const script = `${BOOT_LINES.join('\n')}\n`;
+            const totalChars = script.length;
+            let holdTicks = 0;
+
+            lines.textContent = '';
+            lines.classList.add('typing');
+
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            const typeTimer = setInterval(() => {
+                if (finished) return;
+
+                if (reducedMotion) {
+                    lines.textContent = script;
+                    progress.style.width = '100%';
+                    finishBoot();
+                    return;
+                }
+
+                if (holdTicks > 0) {
+                    holdTicks--;
+                    return;
+                }
+
+                if (i < totalChars) {
+                    const ch = script.charAt(i);
+                    lines.textContent += ch;
+                    i++;
+
+                    const progressPct = Math.min(100, Math.floor((i / totalChars) * 100));
+                    progress.style.width = `${progressPct}%`;
+
+                    if (ch === '\n') {
+                        holdTicks = 5;
+                    }
+                    return;
+                }
+
+                progress.style.width = '100%';
+                finishBoot();
+            }, 24);
+
+            function finishBoot() {
+                if (finished) return;
+                finished = true;
+                clearInterval(typeTimer);
+                lines.classList.remove('typing');
+                sessionStorage.setItem('spyder_boot_done', '1');
+                boot.classList.add('hidden');
+                setTimeout(() => {
+                    boot.remove();
+                    const search = document.getElementById('search');
+                    if (search) search.focus();
+                }, 340);
             }
         }
 
@@ -987,7 +1365,7 @@
         // ============================================================
         function renderFolders(folders) {
             const grid = document.getElementById('folders-grid');
-            if (!folders.length) { grid.innerHTML = '<div class="empty-msg" align="center">API LIMIT REACHED // NO MODULES FOUND</div>'; return; }
+            if (!folders.length) { grid.innerHTML = '<div class="empty-msg"> API LIMIT REACHED </div>'; return; }
 
             grid.innerHTML = folders.map(f => {
                 const name = f.name || f.path;
@@ -1006,6 +1384,8 @@
         // OPEN FOLDER / NAVIGATE
         // ============================================================
         async function openFolder(folderName) {
+            screenFlash('glitch');
+            boostTitleGlitch();
             // highlight active
             document.querySelectorAll('.folder-card').forEach(c => c.classList.remove('active'));
             const fc = document.getElementById('fc-' + folderName);
@@ -1025,6 +1405,7 @@
         }
 
         async function openSubFolder(path, displayName) {
+            screenFlash('scan');
             currentPath.push(displayName);
             renderBreadcrumb();
             await loadPath(path);
@@ -1032,7 +1413,7 @@
 
         async function loadPath(path) {
             const content = document.getElementById('files-content');
-            content.innerHTML = `<div class="loading-msg">SCANNING ${path.toUpperCase()}...</div>`;
+            content.innerHTML = `<div class="loading-msg">SCANNING ${path.toUpperCase()}... [########..]</div>`;
             try {
                 const items = await fetchContents(path);
                 renderFiles(items, path);
@@ -1054,10 +1435,10 @@
             const files = items.filter(i => i.type === 'file');
             const filtered = [...dirs, ...files];
 
-            const rows = filtered.map(item => {
+            const rows = filtered.map((item, idx) => {
                 if (item.type === 'dir') {
                     return `
-      <tr onclick="openSubFolder('${(basePath + '/' + item.name).replace(/'/g, "\\'")}','${item.name.replace(/'/g, "\\'")}');" style="cursor:pointer">
+            <tr style="--row-index:${idx};cursor:pointer" onclick="openSubFolder('${(basePath + '/' + item.name).replace(/'/g, "\\'")}','${item.name.replace(/'/g, "\\'")}');">
         <td><a class="file-link"><span class="file-icon">📁</span>${item.name}/</a></td>
         <td><span class="file-type-badge badge-dir">DIR</span></td>
         <td style="color:var(--muted)">—</td>
@@ -1071,7 +1452,7 @@
                 const viewUrl = `${GH_VIEW}/${item.path}`;
                 const rawUrl = item.download_url || `${RAW}/${item.path}`;
                 return `
-    <tr>
+        <tr style="--row-index:${idx}">
       <td>
         <a class="file-link" href="${viewUrl}" target="_blank" rel="noopener">
           <span class="file-icon">${icon}</span>${escapeHtml(item.name)}
@@ -1123,6 +1504,7 @@
         // CLOSE / BACK
         // ============================================================
         function closeFolder() {
+            screenFlash('scan');
             document.getElementById('files-panel').classList.remove('visible');
             document.getElementById('folders-section').style.display = 'block';
             document.querySelectorAll('.folder-card').forEach(c => c.classList.remove('active'));
@@ -1134,6 +1516,7 @@
         // ============================================================
         document.getElementById('search').addEventListener('input', function () {
             const q = this.value.toLowerCase().trim();
+            this.parentElement.classList.toggle('has-text', q.length > 0);
             if (!q) {
                 document.querySelectorAll('.folder-card').forEach(c => { c.style.display = ''; });
                 return;
@@ -1147,6 +1530,18 @@
                 const desc = c.querySelector('.folder-desc').textContent.toLowerCase();
                 c.style.display = (name.includes(q) || desc.includes(q)) ? '' : 'none';
             });
+        });
+
+        document.getElementById('search').addEventListener('keydown', (e) => {
+            if (e.key.length === 1 || e.key === 'Backspace' || e.key === 'Delete') {
+                screenFlash('scan');
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.btn-view') || e.target.closest('.btn-back') || e.target.closest('.folder-card')) {
+                screenFlash('glitch');
+            }
         });
 
         // ============================================================
@@ -1200,6 +1595,12 @@
         // START
         // ============================================================
         init();
+
+        setInterval(() => {
+            if (Math.random() > 0.7 && document.visibilityState === 'visible') {
+                boostTitleGlitch();
+            }
+        }, 6000);
     </script>
 </body>
 
