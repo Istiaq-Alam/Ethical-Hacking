@@ -1658,10 +1658,11 @@
                 const badge = getBadge(ext);
                 const icon = getIcon(ext);
                 const rawUrl = `https://raw.githubusercontent.com/${REPO}/${BRANCH}/${item.path}`;
+                const viewUrl = `https://spydercehub.vercel.app/${item.path}`;
                 return `
         <tr style="--row-index:${idx}">
       <td>
-        <a class="file-link" href="${rawUrl}" target="_blank" rel="noopener">
+        <a class="file-link" href="${viewUrl}" target="_blank" rel="noopener">
           <span class="file-icon">${icon}</span>${escapeHtml(item.name)}
         </a>
       </td>
