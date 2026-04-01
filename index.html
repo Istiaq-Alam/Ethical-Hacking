@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ethical Hacking Hub</title>
+    <title>SPY*DER // Ethical Hacking Hub</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
         href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap"
@@ -1657,19 +1657,18 @@
                 const size = item.size ? formatSize(item.size) : '—';
                 const badge = getBadge(ext);
                 const icon = getIcon(ext);
-                const viewUrl = `${GH_VIEW}/${item.path}`;
-                const rawUrl = item.download_url || `${RAW}/${item.path}`;
+                const rawUrl = `https://raw.githubusercontent.com/${REPO}/${BRANCH}/${item.path}`;
                 return `
         <tr style="--row-index:${idx}">
       <td>
-        <a class="file-link" href="${viewUrl}" target="_blank" rel="noopener">
+        <a class="file-link" href="${rawUrl}" target="_blank" rel="noopener">
           <span class="file-icon">${icon}</span>${escapeHtml(item.name)}
         </a>
       </td>
       <td><span class="file-type-badge ${badge.cls}">${badge.label}</span></td>
       <td style="color:var(--muted);font-size:0.72rem">${size}</td>
       <td>
-        <a class="btn-view" href="${rawUrl}" target="_blank" rel="noopener" download="${item.name}">⬇ GET</a>
+        <a class="btn-view" href="${rawUrl}" target="_blank" rel="noopener">⬇ GET</a>
       </td>
     </tr>`;
             }).join('');
