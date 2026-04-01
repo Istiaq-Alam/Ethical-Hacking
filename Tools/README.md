@@ -9,7 +9,6 @@ For a list of free hacking books available for download, go [here](https://githu
 
 ## Table of Contents
 
-<!-- MarkdownTOC depth=4 -->
 
 - [System](#system)
     - [Tutorials](#tutorials)
@@ -44,7 +43,6 @@ For a list of free hacking books available for download, go [here](https://githu
     - [tools](#tools-6)
 - [ETC](#etc)
 
-<!-- /MarkdownTOC -->
 
 # System
 
