@@ -10,7 +10,7 @@
    - YouTube: "Introduction to Linux – Full Course for Beginners" by freeCodeCamp.org.
 
 2. Introduction to Ethical Hacking
- - Understand Ethical Hacking: Learn about the frameworks, rules, and ethics.
+ - Understand Ethical Hacking: Learn about the frameworks, rules, and ethics  
    - Recommended Book: "Hacking: The Art of Exploitation" by Jon Erickson.
    - Free Resource: "Penetration Testing - A Hands-On Introduction to Hacking" by Georgia Weidman (search for free versions or summaries online).
    - YouTube: "Introduction to Ethical Hacking" by Simplilearn.
